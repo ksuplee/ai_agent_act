@@ -1,5 +1,4 @@
-## .github/workflows/deploy.yml 
-## 2026. 2. 17.
+## .github/workflows/deploy.yml
 
 name: Agent CI/CD Pipeline
 
@@ -36,7 +35,7 @@ jobs:
         run: python test_agent.py
 
       # --- 여기부터 GHCR push ---
-      - name: Log in to GHCR
+      - name: Log in to GHCR (GitHub Container Regisry)
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -46,7 +45,7 @@ jobs:
       - name: Build and Push Docker Image (GHCR)
         uses: docker/build-push-action@v6
         with:
-          # context: ./AIagentAct   # working-directory를 안 쓰면 context는 이걸로
+        #  --- Github Package로 업로드 ---
           push: true
           tags: |
             ghcr.io/${{ github.repository }}/ai-agent:${{ github.sha }}
